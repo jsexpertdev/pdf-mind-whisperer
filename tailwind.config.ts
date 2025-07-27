@@ -52,6 +52,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'chat-bubble': {
+					user: 'hsl(var(--chat-bubble-user))',
+					'user-foreground': 'hsl(var(--chat-bubble-user-foreground))',
+					ai: 'hsl(var(--chat-bubble-ai))',
+					'ai-foreground': 'hsl(var(--chat-bubble-ai-foreground))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -88,7 +94,14 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-up': 'fadeUp 0.3s ease-out',
+				'typing': 'typing 1.5s infinite'
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-secondary': 'var(--gradient-secondary)',
+				'gradient-glass': 'var(--gradient-glass)'
 			}
 		}
 	},
