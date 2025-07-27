@@ -1,4 +1,4 @@
-import { pipeline, env } from '@xenova/transformers';
+import { pipeline, env } from '@huggingface/transformers';
 
 // Configure transformers to use local models
 env.allowRemoteModels = false;
@@ -27,7 +27,7 @@ export class EmbeddingService {
   async initialize() {
     try {
       // Use a smaller, faster model for embeddings
-      this.embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+      this.embedder = await pipeline('feature-extraction', 'mixedbread-ai/mxbai-embed-xsmall-v1');
       console.log('Embedding service initialized');
     } catch (error) {
       console.error('Failed to initialize embedding service:', error);
