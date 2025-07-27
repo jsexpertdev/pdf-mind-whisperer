@@ -1,12 +1,27 @@
+import * as pdfjsLib from 'pdfjs-dist';
 import type { Document } from './embeddings';
+
+// Set up PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
 export class PDFProcessor {
   static async extractTextFromPDF(file: File): Promise<string> {
     try {
-      const pdfParse = await import('pdf-parse');
       const arrayBuffer = await file.arrayBuffer();
-      const data = await pdfParse.default(arrayBuffer);
-      return data.text;
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      
+      let fullText = '';
+      
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items
+          .map((item: any) => item.str)
+          .join(' ');
+        fullText += pageText + '\n';
+      }
+      
+      return fullText;
     } catch (error) {
       console.error('Error extracting text from PDF:', error);
       throw new Error('Failed to extract text from PDF');
